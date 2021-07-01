@@ -1,11 +1,11 @@
 import './App.css';
-import Login from './components/account/login/Login';
+import LoginModal from './components/account/login/LoginModal';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Login loginFailed={true}/>
+        <LoginModal show></LoginModal>
       </header>
     </div>
   );
