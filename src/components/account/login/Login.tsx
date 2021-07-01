@@ -59,9 +59,9 @@ export default function Login(props: LoginProps) {
     const errorMessage = loginFailed && <Alert variant="danger">Error de autenticación, revise los datos y vuelva a ingresar</Alert>
 
     const formInputsActions = {
-        ["emailInput"]: setEmail,
-        ["passwordInput"]: setPassword,
-        ["rememberMeCheck"]: setRememberMe
+        "emailInput": setEmail,
+        "passwordInput": setPassword,
+        "rememberMeCheck": setRememberMe
     }
 
     const handleInputBox = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,6 +77,16 @@ export default function Login(props: LoginProps) {
         event.preventDefault();
         props.onLogin && props.onLogin({ email: email, password: password, rememberMe: rememberMe });
     }
+
+    const loginButton = isEnableToSend ? (
+        <Button variant="primary" type="submit" onClick={onLoginClick}>
+            Ingresar
+        </Button>
+    ) : (
+        <Button variant="secondary" type="submit" onClick={onLoginClick} disabled >
+            Ingresar
+        </Button>
+    )
 
     return (
         <>
@@ -94,9 +104,7 @@ export default function Login(props: LoginProps) {
                 <Form.Group controlId="rememberMeCheck">
                     <Form.Check type="checkbox" label="Recordarme la proxima vez" checked={rememberMe} onChange={handleCheckbox} />
                 </Form.Group>
-                <Button variant={isEnableToSend ? "primary" : "secondary"} type="submit" onClick={onLoginClick} disabled={!isEnableToSend} >
-                    Ingresar
-                </Button>
+                {loginButton}
             </Form>
         </>
     );
