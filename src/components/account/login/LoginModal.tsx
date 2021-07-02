@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Modal } from 'react-bootstrap'
-import Login, { LoginCredentials } from './Login'
+import LoginForm, { LoginCredentials } from './LoginForm'
 
 export interface LoginModalProps {
     onLogin?: (credentials: LoginCredentials) => void,
@@ -29,7 +29,7 @@ export default function LoginModal(props: LoginModalProps) {
                     <Modal.Title>Ingreso al sistema</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Login onLogin={props.onLogin} />
+                    <LoginForm onLogin={props.onLogin} />
                 </Modal.Body>
             </Modal>
         </>

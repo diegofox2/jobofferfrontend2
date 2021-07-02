@@ -1,14 +1,14 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import Login from '../../../../components/account/login/Login';
+import LoginForm from '../../../../components/account/login/LoginForm';
 
 export default {
   title: 'Example/Login',
-  component: Login,
+  component: LoginForm,
   argTypes: {},
-} as ComponentMeta<typeof Login>;
+} as ComponentMeta<typeof LoginForm>;
 
-const Template: ComponentStory<typeof Login> = (args) => <Login {...args} />;
+const Template: ComponentStory<typeof LoginForm> = (args) => <LoginForm {...args} />;
 
 export const InitialState = Template.bind({});
 InitialState.args = {};

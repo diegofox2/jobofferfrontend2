@@ -25,7 +25,7 @@ export interface LoginProps {
     onLoginSuccess?: () => void;
 }
 
-export default function Login(props: LoginProps) {
+export default function LoginForm(props: LoginProps) {
 
     const [email, setEmail] = React.useState<string>("");
     const [password, setPassword] = React.useState<string>("");
