@@ -1,12 +1,10 @@
 import './App.css';
-import LoginModal from './components/account/login/LoginModal';
+import HomePage from './pages/home/HomePage';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <LoginModal show></LoginModal>
-      </header>
+      <HomePage></HomePage>
     </div>
   );
 }

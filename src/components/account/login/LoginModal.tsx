@@ -29,7 +29,7 @@ export default function LoginModal(props: LoginModalProps) {
                     <Modal.Title>Ingreso al sistema</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Login />
+                    <Login onLogin={props.onLogin} />
                 </Modal.Body>
             </Modal>
         </>

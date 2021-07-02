@@ -11,4 +11,4 @@ export default {
 const Template: ComponentStory<typeof LoginModal> = (args) => <LoginModal {...args} />;
 
 export const InitialState = Template.bind({});
-InitialState.args = { show: true};
+InitialState.args = { show: true };
