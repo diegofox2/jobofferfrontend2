@@ -3,8 +3,8 @@ import { Modal } from 'react-bootstrap'
 import Login, { LoginCredentials } from './Login'
 
 export interface LoginModalProps {
-    onLogin: (credentials: LoginCredentials) => void,
-    onClose: () => void,
+    onLogin?: (credentials: LoginCredentials) => void,
+    onClose?: () => void,
     show: boolean
 }
 
