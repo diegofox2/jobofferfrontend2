@@ -1,3 +1,4 @@
+import React from 'react'
 import { useForm } from "react-hook-form"
 import { Form, Button } from 'react-bootstrap'
 
@@ -13,6 +14,8 @@ type FormData = {
 export default function RegisterForm() {
 
     const { register, handleSubmit } = useForm<FormData>();
+
+    const [isReadyToSubmit, setIsReadyToSubmit] = React.useState()
 
     const onSubmit = handleSubmit((data: any) => console.log(data));
 
@@ -34,6 +37,9 @@ export default function RegisterForm() {
                 <Form.Group controlId="isRecruiterCheck">
                     <Form.Check type="checkbox" label="Soy recruiter" {...register("isRecruiter")} />
                 </Form.Group>
+                <Button variant={isReadyToSubmit ? "primary" : "secondary"} type="submit" disabled={!isReadyToSubmit} >
+                    Ingresar
+                </Button>
             </Form>
         </>
     )

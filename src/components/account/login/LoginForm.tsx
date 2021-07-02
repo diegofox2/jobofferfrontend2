@@ -78,16 +78,6 @@ export default function LoginForm(props: LoginProps) {
         props.onLogin && props.onLogin({ email: email, password: password, rememberMe: rememberMe });
     }
 
-    const loginButton = isEnableToSend ? (
-        <Button variant="primary" type="submit" onClick={onLoginClick}>
-            Ingresar
-        </Button>
-    ) : (
-        <Button variant="secondary" type="submit" onClick={onLoginClick} disabled >
-            Ingresar
-        </Button>
-    )
-
     return (
         <>
             {errorMessage}
@@ -104,7 +94,9 @@ export default function LoginForm(props: LoginProps) {
                 <Form.Group controlId="rememberMeCheck">
                     <Form.Check type="checkbox" label="Recordarme la proxima vez" checked={rememberMe} onChange={handleCheckbox} />
                 </Form.Group>
-                {loginButton}
+                <Button variant={isEnableToSend ? "primary" : "secondary"} type="submit" onClick={onLoginClick} disabled={!isEnableToSend} >
+                    Ingresar
+                </Button>
             </Form>
         </>
     );
