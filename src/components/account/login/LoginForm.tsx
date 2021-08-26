@@ -77,12 +77,12 @@ export default function LoginForm(props: LoginProps) {
       <Form>
         <Form.Group controlId='emailInput'>
           <Form.Label>Email</Form.Label>
-          <Form.Control type='email' placeholder='Enter email' value={email} onChange={handleInputBox} />
+          <Form.Control type='email' placeholder='Ingrese su email' value={email} onChange={handleInputBox} />
         </Form.Group>
 
         <Form.Group controlId='passwordInput'>
           <Form.Label>Password</Form.Label>
-          <Form.Control type='password' placeholder='Password' value={password} onChange={handleInputBox} />
+          <Form.Control type='password' placeholder='Ingrese su Password' value={password} onChange={handleInputBox} />
         </Form.Group>
         <Form.Group controlId='rememberMeCheck'>
           <Form.Check type='checkbox' label='Recordarme la proxima vez' checked={rememberMe} onChange={handleCheckbox} />
