@@ -5,7 +5,7 @@ import LoginModal from '../../../../components/account/login/LoginModal';
 export default {
   title: 'Example/LoginModal',
   component: LoginModal,
-  argTypes: {},
+  argTypes: {}
 } as ComponentMeta<typeof LoginModal>;
 
 const Template: ComponentStory<typeof LoginModal> = (args) => <LoginModal {...args} />;

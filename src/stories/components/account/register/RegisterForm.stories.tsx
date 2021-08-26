@@ -5,7 +5,7 @@ import RegisterForm from '../../../../components/account/register/RegisterForm';
 export default {
   title: 'Example/RegisterForm',
   component: RegisterForm,
-  argTypes: {},
+  argTypes: {}
 } as ComponentMeta<typeof RegisterForm>;
 
 const Template: ComponentStory<typeof RegisterForm> = (args) => <RegisterForm />;

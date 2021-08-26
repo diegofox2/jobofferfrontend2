@@ -1,11 +1,9 @@
-
-import LoginModal from "../../components/account/login/LoginModal"
+import LoginModal from '../../components/account/login/LoginModal';
 
 export default function HomePage() {
-
-    return (
-        <>
-            <LoginModal show={true}></LoginModal>
-        </>
-    )
+  return (
+    <>
+      <LoginModal show={true}></LoginModal>
+    </>
+  );
 }
