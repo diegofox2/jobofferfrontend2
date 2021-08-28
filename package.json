@@ -43,6 +43,11 @@
       }
     ]
   },
+  "jest": {
+    "coveragePathIgnorePatterns" : [
+      ".stories." 
+    ]
+  },
   "browserslist": {
     "production": [
       ">0.2%",

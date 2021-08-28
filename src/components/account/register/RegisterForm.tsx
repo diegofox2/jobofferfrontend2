@@ -2,39 +2,69 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Form, Button, Alert } from 'react-bootstrap';
 
-type FormData = {
+export interface RegisterFormOutputData {
+  email: string;
+  password: string;
+  repeatedPassword: string;
+  isRecruiter: boolean;
+}
+
+interface RegisterFormProps {
   email?: string;
   password?: string;
   repeatedPassword?: string;
   isRecruiter?: boolean;
-};
+  errorMessage?: string;
 
-export default function RegisterForm(props: FormData) {
-  const { register, handleSubmit, watch } = useForm<FormData>();
+  onCreateAccount?: (outputData: RegisterFormOutputData) => void;
+}
+
+export default function RegisterForm(props: RegisterFormProps) {
+  const { register, watch, setValue } = useForm<RegisterFormProps>();
 
   const emailWatch = watch('email');
   const passwordWatch = watch('password');
   const repeatedPasswordWatch = watch('repeatedPassword');
+  const isRecruiterWatch = watch('isRecruiter');
 
-  const [isReadyToSubmit, setIsReadyToSubmit] = React.useState<boolean>(false);
-  const [isFormInvalid, setIsFormInvalid] = React.useState<boolean>();
+  const [isFormFilled, setIsFormFilled] = React.useState<boolean>(false);
+  const [isFormValid, setIsFormValid] = React.useState<boolean>(false);
 
   useEffect(() => {
-    emailWatch && passwordWatch && repeatedPasswordWatch ? setIsReadyToSubmit(true) : setIsReadyToSubmit(false);
+    emailWatch && passwordWatch && repeatedPasswordWatch ? setIsFormFilled(true) : setIsFormFilled(false);
   }, [emailWatch, passwordWatch, repeatedPasswordWatch]);
 
   useEffect(() => {
-    isReadyToSubmit && passwordWatch !== repeatedPasswordWatch ? setIsFormInvalid(true) : setIsFormInvalid(false);
-  }, [isReadyToSubmit, passwordWatch, repeatedPasswordWatch]);
+    isFormFilled && passwordWatch === repeatedPasswordWatch ? setIsFormValid(true) : setIsFormValid(false);
+  }, [isFormFilled, passwordWatch, repeatedPasswordWatch]);
 
-  const onSubmit = (data: FormData) => console.log(data);
+  useEffect(() => {
+    setValue('email', props.email ? props.email : '');
+    setValue('password', props.password ? props.password : '');
+    setValue('repeatedPassword', props.repeatedPassword ? props.repeatedPassword : '');
+    setValue('isRecruiter', props.isRecruiter ? props.isRecruiter : false);
+  }, [props.email, props.password, props.repeatedPassword, props.isRecruiter]);
 
-  const errorMessage = isFormInvalid && <Alert variant='danger'>Las contraseñas no coinciden</Alert>;
+  const onSubmit = (event: any) => {
+    event.preventDefault();
+
+    props.onCreateAccount!({
+      email: emailWatch!,
+      password: passwordWatch!,
+      repeatedPassword: repeatedPasswordWatch!,
+      isRecruiter: isRecruiterWatch!
+    });
+  };
+
+  const showPasswordErrorMessage = isFormFilled && !isFormValid && <Alert variant='danger'>Las contraseñas no coinciden</Alert>;
+
+  const showGenralErrorMessage = props.errorMessage && <Alert variant='danger'>{props.errorMessage!}</Alert>;
 
   return (
     <>
-      {errorMessage}
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      {showPasswordErrorMessage}
+      {showGenralErrorMessage}
+      <Form>
         <Form.Group controlId='emailInput'>
           <Form.Label>Email</Form.Label>
           <Form.Control type='email' placeholder='Ingrese su email' {...register('email')} defaultValue={props.email} />
@@ -48,10 +78,10 @@ export default function RegisterForm(props: FormData) {
           <Form.Control type='password' placeholder='Password' {...register('repeatedPassword')} defaultValue={props.repeatedPassword} />
         </Form.Group>
         <Form.Group controlId='isRecruiterCheck'>
-          <Form.Check type='checkbox' label='Soy recruiter' {...register('isRecruiter')} checked={props.isRecruiter ? props.isRecruiter : false} />
+          <Form.Check type='checkbox' label='Soy recruiter' {...register('isRecruiter')} defaultChecked={props.isRecruiter ? props.isRecruiter! : false} />
         </Form.Group>
-        <Button variant={isReadyToSubmit ? 'primary' : 'secondary'} type='submit' disabled={!isReadyToSubmit}>
-          Ingresar
+        <Button variant={isFormFilled ? 'primary' : 'secondary'} onClick={onSubmit} disabled={!isFormValid}>
+          Crear cuenta
         </Button>
       </Form>
     </>

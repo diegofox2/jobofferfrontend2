@@ -3,19 +3,14 @@ import { Form, Button, Alert } from 'react-bootstrap';
 
 export interface LoginCredentials {
   email: string;
-
   password: string;
-
   rememberMe: boolean;
 }
 
-export interface LoginProps {
+interface LoginProps {
   email?: string;
-
   password?: string;
-
   rememberMe?: boolean;
-
   loginFailed?: boolean;
 
   onLogin?: (credentials: LoginCredentials) => void;
@@ -31,15 +26,11 @@ export default function LoginForm(props: LoginProps) {
   const [loginFailed, setLoginFailed] = React.useState<boolean>(false);
 
   React.useEffect(() => {
-    const tryEnableSubmitButton = () => {
-      if (email && password && !loginFailed) {
-        setIsEnableToSend(true);
-      } else {
-        setIsEnableToSend(false);
-      }
-    };
-
-    tryEnableSubmitButton();
+    if (email && password && !loginFailed) {
+      setIsEnableToSend(true);
+    } else {
+      setIsEnableToSend(false);
+    }
   }, [email, password, loginFailed]);
 
   React.useEffect(() => {
