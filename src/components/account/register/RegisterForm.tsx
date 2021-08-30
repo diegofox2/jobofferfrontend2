@@ -46,9 +46,7 @@ export default function RegisterForm(props: RegisterFormProps) {
     setValue('isRecruiter', props.isRecruiter ? props.isRecruiter : false);
   }, [props.email, props.password, props.repeatedPassword, props.isRecruiter]);
 
-  const onCreateAccount = (event: any) => {
-    event.preventDefault();
-
+  const onCreateAccount = () => {
     props.onCreateAccount &&
       props.onCreateAccount!({
         email: emailWatch!,
@@ -58,7 +56,7 @@ export default function RegisterForm(props: RegisterFormProps) {
       });
   };
 
-  const onCancel = (event: any) => {
+  const onCancel = () => {
     props.onCancel && props.onCancel();
   };
 
@@ -86,18 +84,18 @@ export default function RegisterForm(props: RegisterFormProps) {
         <Form.Group controlId='isRecruiterCheck'>
           <Form.Check type='checkbox' label='Soy recruiter' {...register('isRecruiter')} defaultChecked={props.isRecruiter ? props.isRecruiter! : false} />
         </Form.Group>
-          <Row>
-            <Col xs={6}>
-              <Button variant={isFormFilled ? 'primary' : 'secondary'} onClick={onCreateAccount} disabled={!isFormValid}>
-                Crear cuenta
-              </Button>
-            </Col>
-            <Col xs={6}>
-              <Button variant={'secondary'} onClick={onCancel} disabled={!isFormValid}>
-                Cancelar
-              </Button>
-            </Col>
-          </Row>
+        <Row>
+          <Col xs={6}>
+            <Button variant={isFormFilled ? 'primary' : 'secondary'} onClick={onCreateAccount} disabled={!isFormValid}>
+              Crear cuenta
+            </Button>
+          </Col>
+          <Col xs={6}>
+            <Button variant={'secondary'} onClick={onCancel} disabled={!isFormValid}>
+              Cancelar
+            </Button>
+          </Col>
+        </Row>
       </Form>
     </>
   );
