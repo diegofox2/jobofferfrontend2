@@ -4,7 +4,7 @@ import RegisterForm, { RegisterFormOutputData } from '../../../../components/acc
 describe('The registration form', () => {
   test('disables the create account button in the initial state', () => {
     render(<RegisterForm />);
-    expect(screen.getByRole('button')).toBeDisabled();
+    expect(screen.getByText('Crear cuenta')).toBeDisabled();
     expect(screen.queryByRole('alert')).not.toBeInTheDocument();
   });
 
@@ -21,7 +21,7 @@ describe('The registration form', () => {
     fireEvent.change(repeatedPasswrd, { target: { value: 'tritri' } });
 
     // Assert
-    expect(screen.getByRole('button')).toBeEnabled();
+    expect(screen.getByText('Crear cuenta')).toBeEnabled();
   });
 
   test('shows an error message when password does not match', () => {
@@ -38,12 +38,12 @@ describe('The registration form', () => {
 
     // Assert
     expect(screen.getByRole('alert')).toBeInTheDocument();
-    expect(screen.getByRole('button')).toBeDisabled();
+    expect(screen.getByText('Crear cuenta')).toBeDisabled();
   });
 
   test('shows general error message when prop errorMessage has text', () => {
     const errorMessage = 'Hubo un error en el servidor';
-    render(<RegisterForm errorMessage= {errorMessage} />);
+    render(<RegisterForm errorMessage={errorMessage} />);
     expect(screen.queryByRole('alert')).toBeInTheDocument();
     expect(screen.queryByText(errorMessage)).toBeInTheDocument();
   });
@@ -65,6 +65,27 @@ describe('The registration form', () => {
     fireEvent.change(repeatedPassword, { target: { value: 'tritri' } });
     fireEvent.click(iamRecruiter);
     fireEvent.click(createAccountButton);
+
+    // Assert
+    expect(callback).toBeCalledWith({ email: 'a@b.com', password: 'tritri', repeatedPassword: 'tritri', isRecruiter: true });
+  });
+
+  test('run callback when the user clicks on cancel button', () => {
+    // Arrange
+    const callback = jest.fn();
+
+    render(<RegisterForm onCancel={callback} />);
+
+    const email = screen.getByLabelText('Email');
+    const password = screen.getByLabelText('Password');
+    const repeatedPassword = screen.getByLabelText('Repita su password');
+    const cancelButton = screen.getByText('Cancelar');
+
+    // Act
+    fireEvent.change(email, { target: { value: 'a@b.com' } });
+    fireEvent.change(password, { target: { value: 'tritri' } });
+    fireEvent.change(repeatedPassword, { target: { value: 'tritri' } });
+    fireEvent.click(cancelButton);
 
     // Assert
     expect(callback).toBeCalled();

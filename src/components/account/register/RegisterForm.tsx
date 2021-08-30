@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Form, Button, Alert } from 'react-bootstrap';
+import { Form, Button, Alert, Col, Row } from 'react-bootstrap';
 
 export interface RegisterFormOutputData {
   email: string;
@@ -17,6 +17,7 @@ interface RegisterFormProps {
   errorMessage?: string;
 
   onCreateAccount?: (outputData: RegisterFormOutputData) => void;
+  onCancel?: () => void;
 }
 
 export default function RegisterForm(props: RegisterFormProps) {
@@ -45,15 +46,20 @@ export default function RegisterForm(props: RegisterFormProps) {
     setValue('isRecruiter', props.isRecruiter ? props.isRecruiter : false);
   }, [props.email, props.password, props.repeatedPassword, props.isRecruiter]);
 
-  const onSubmit = (event: any) => {
+  const onCreateAccount = (event: any) => {
     event.preventDefault();
 
-    props.onCreateAccount!({
-      email: emailWatch!,
-      password: passwordWatch!,
-      repeatedPassword: repeatedPasswordWatch!,
-      isRecruiter: isRecruiterWatch!
-    });
+    props.onCreateAccount &&
+      props.onCreateAccount!({
+        email: emailWatch!,
+        password: passwordWatch!,
+        repeatedPassword: repeatedPasswordWatch!,
+        isRecruiter: isRecruiterWatch!
+      });
+  };
+
+  const onCancel = (event: any) => {
+    props.onCancel && props.onCancel();
   };
 
   const showPasswordErrorMessage = isFormFilled && !isFormValid && <Alert variant='danger'>Las contraseñas no coinciden</Alert>;
@@ -80,9 +86,18 @@ export default function RegisterForm(props: RegisterFormProps) {
         <Form.Group controlId='isRecruiterCheck'>
           <Form.Check type='checkbox' label='Soy recruiter' {...register('isRecruiter')} defaultChecked={props.isRecruiter ? props.isRecruiter! : false} />
         </Form.Group>
-        <Button variant={isFormFilled ? 'primary' : 'secondary'} onClick={onSubmit} disabled={!isFormValid}>
-          Crear cuenta
-        </Button>
+          <Row>
+            <Col xs={6}>
+              <Button variant={isFormFilled ? 'primary' : 'secondary'} onClick={onCreateAccount} disabled={!isFormValid}>
+                Crear cuenta
+              </Button>
+            </Col>
+            <Col xs={6}>
+              <Button variant={'secondary'} onClick={onCancel} disabled={!isFormValid}>
+                Cancelar
+              </Button>
+            </Col>
+          </Row>
       </Form>
     </>
   );
