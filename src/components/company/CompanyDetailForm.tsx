@@ -11,8 +11,8 @@ export interface CompanyDetailProps {
   onCancel?: () => void;
 }
 
-export default function CompanyDetailForm (props: CompanyDetailProps) {
-  const { register, watch, setValue } = useForm<Company>();
+export default function CompanyDetailForm(props: CompanyDetailProps) {
+  const { register, watch } = useForm<Company>();
 
   const errorMessage = props.errorMessage && <Alert variant='danger'>{props.errorMessage!}</Alert>;
 
@@ -24,20 +24,13 @@ export default function CompanyDetailForm (props: CompanyDetailProps) {
     nameWatch && activityWatch ? setIsFormFilled(true) : setIsFormFilled(false);
   }, [nameWatch, activityWatch]);
 
-  useEffect(() => {
-    if (props.company) {
-      setValue('name', props.company.name);
-      setValue('activity', props.company.activity);
-    }
-  }, [props.company?.name, props.company?.activity]);
-
   const onSave = () => {
     props.onSave && props.onSave({ id: '', name: nameWatch, activity: activityWatch });
   };
 
   const onCancel = () => {
     props.onCancel && props.onCancel();
-  }
+  };
 
   return (
     <>

@@ -22,10 +22,16 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --coverage",
+    "test": "react-scripts test --coverage --watchAll",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/stories/",
+      "<rootDir>/src/model/"
+    ]
   },
   "eslintConfig": {
     "extends": [
@@ -41,11 +47,6 @@
           "import/no-anonymous-default-export": "off"
         }
       }
-    ]
-  },
-  "jest": {
-    "coveragePathIgnorePatterns" : [
-      ".stories." 
     ]
   },
   "browserslist": {

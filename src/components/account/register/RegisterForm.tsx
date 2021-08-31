@@ -21,7 +21,7 @@ interface RegisterFormProps {
 }
 
 export default function RegisterForm(props: RegisterFormProps) {
-  const { register, watch, setValue } = useForm<RegisterFormProps>();
+  const { register, watch } = useForm<RegisterFormProps>();
 
   const emailWatch = watch('email');
   const passwordWatch = watch('password');
@@ -38,13 +38,6 @@ export default function RegisterForm(props: RegisterFormProps) {
   useEffect(() => {
     isFormFilled && passwordWatch === repeatedPasswordWatch ? setIsFormValid(true) : setIsFormValid(false);
   }, [isFormFilled, passwordWatch, repeatedPasswordWatch]);
-
-  useEffect(() => {
-    setValue('email', props.email ? props.email : '');
-    setValue('password', props.password ? props.password : '');
-    setValue('repeatedPassword', props.repeatedPassword ? props.repeatedPassword : '');
-    setValue('isRecruiter', props.isRecruiter ? props.isRecruiter : false);
-  }, [props.email, props.password, props.repeatedPassword, props.isRecruiter]);
 
   const onCreateAccount = () => {
     props.onCreateAccount &&
