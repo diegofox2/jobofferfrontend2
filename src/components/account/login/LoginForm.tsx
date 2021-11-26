@@ -14,8 +14,6 @@ interface LoginProps {
   loginFailed?: boolean;
 
   onLogin?: (credentials: LoginCredentials) => void;
-
-  onLoginSuccess?: () => void;
 }
 
 export default function LoginForm(props: LoginProps) {
