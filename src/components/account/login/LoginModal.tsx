@@ -3,7 +3,7 @@ import { Modal } from 'react-bootstrap';
 import LoginForm, { LoginCredentials } from './LoginForm';
 
 export interface LoginModalProps {
-  onLogin?: (credentials: LoginCredentials) => void;
+  onSubmit?: (credentials: LoginCredentials) => void;
   onClose?: () => void;
   show: boolean;
 }
@@ -27,7 +27,7 @@ export default function LoginModal(props: LoginModalProps) {
           <Modal.Title>Ingreso al sistema</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <LoginForm onLogin={props.onLogin} />
+          <LoginForm onLogin={props.onSubmit} />
         </Modal.Body>
       </Modal>
     </>

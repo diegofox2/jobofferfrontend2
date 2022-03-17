@@ -1,6 +1,6 @@
 import { render, fireEvent, screen } from '@testing-library/react';
-import LoginModal from '../../../../components/account/login/LoginModal';
 import { LoginCredentials } from '../../../../components/account/login/LoginForm';
+import LoginModal from '../../../../components/account/login/LoginModal';
 
 describe('The LoginModal component', () => {
   test('should appear when prop ´show´ is true', () => {
@@ -25,7 +25,7 @@ describe('The LoginModal component', () => {
     // arrange
     const onLoginHandler = jest.fn().mockImplementation((credential: LoginCredentials) => {});
 
-    render(<LoginModal show={true} onLogin={onLoginHandler} />);
+    render(<LoginModal show={true} onSubmit={onLoginHandler} />);
     const loginButton = screen.getAllByRole('button')[1];
     const email = screen.getByLabelText('Email');
     const password = screen.getByLabelText('Password');
