@@ -1,15 +1,15 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import FilterItem, { FilterItemValue } from '../../../components/filter/FilterItem';
+import CollapsibleCheckboxList, { CollapsibleCheckboxListItemValue } from '../../../components/filter/CollapsibleCheckboxList ';
 
 export default {
   title: 'Example/FilterItem',
-  component: FilterItem,
+  component: CollapsibleCheckboxList,
   argTypes: {}
-} as ComponentMeta<typeof FilterItem>;
+} as ComponentMeta<typeof CollapsibleCheckboxList>;
 
-const Template: ComponentStory<typeof FilterItem> = (args) => <FilterItem {...args} />;
+const Template: ComponentStory<typeof CollapsibleCheckboxList> = (args) => <CollapsibleCheckboxList {...args} />;
 
-const items: Array<FilterItemValue> = [
+const items: Array<CollapsibleCheckboxListItemValue> = [
   { id: '1', value: 'Buenos Aires', checked: false },
   { id: '2', value: 'Ciudad de Buenos Aires', checked: false },
   { id: '3', value: 'San Juan', checked: false },

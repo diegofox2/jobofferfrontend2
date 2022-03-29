@@ -1,20 +1,20 @@
 import React from 'react';
 import { Accordion, Card, Form } from 'react-bootstrap';
 
-export interface FilterItemValue {
+export interface CollapsibleCheckboxListItemValue {
   id: string;
   value: string;
   checked: boolean;
 }
 
-export interface FilterItemProps {
+export interface CollapsibleCheckboxListProps {
   title: string;
-  values: Array<FilterItemValue>;
-  onSelectedValues: (values: Array<FilterItemValue>) => {};
+  values: Array<CollapsibleCheckboxListItemValue>;
+  onSelectedValues: (values: Array<CollapsibleCheckboxListItemValue>) => {};
 }
 
-export default function FilterItem(props: FilterItemProps) {
-  const [selectedItems, setSelectedItems] = React.useState<Array<FilterItemValue>>(props.values.filter((item) => item.checked));
+export default function CollapsibleCheckboxList(props: CollapsibleCheckboxListProps) {
+  const [selectedItems, setSelectedItems] = React.useState<Array<CollapsibleCheckboxListItemValue>>(props.values.filter((item) => item.checked));
   const [anyItemChanged, setAnyItemChanged] = React.useState<boolean>(false);
 
   const onChange = (event: any) => {
