@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import CollapsibleCheckboxList, { CollapsibleCheckboxListItemValue } from '../../../components/filter/CollapsibleCheckboxList ';
 
 export default {
-  title: 'Example/FilterItem',
+  title: 'Example/CollapsibleCheckboxList',
   component: CollapsibleCheckboxList,
   argTypes: {}
 } as ComponentMeta<typeof CollapsibleCheckboxList>;
